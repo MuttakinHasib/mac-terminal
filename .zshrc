@@ -1,0 +1,20 @@
+plugins=(
+  git
+  yarn
+  npm
+  github
+  bundler
+  macos
+  rake
+  rbenv
+  ruby
+  jsontools
+  node
+  pip
+  web-search
+  zsh-autosuggestions
+  colored-man-pages
+  colorize
+  common-aliases
+  copyfile
+)
