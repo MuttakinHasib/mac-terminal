@@ -1,6 +1,6 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
-export DB_CONNECTION_URL="postgresql://directus:directus@127.0.0.1:5433/directus" 
+
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
@@ -85,6 +85,9 @@ plugins=(
   pip
   web-search
   zsh-autosuggestions
+  zsh-syntax-highlighting
+  fast-syntax-highlighting
+  zsh-autocomplete
   colored-man-pages
   colorize
   common-aliases
@@ -98,6 +101,9 @@ plugins=(
 )
 
 source $ZSH/oh-my-zsh.sh
+
+# Autocomplete
+zstyle ':autocomplete:*' min-input 2
 
 # User configuration
 
@@ -137,25 +143,20 @@ fi
 source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
+
+# Load a few important annexes, without Turbo
+# (this is currently required for annexes)
+zinit light-mode for \
+    zdharma-continuum/zinit-annex-as-monitor \
+    zdharma-continuum/zinit-annex-bin-gem-node \
+    zdharma-continuum/zinit-annex-patch-dl \
+    zdharma-continuum/zinit-annex-rust
+    
+zinit light ntnyq/omz-plugin-bun
 ### End of Zinit's installer chunk
 
-# Created by `pipx` on 2024-05-18 20:18:36
-export PATH="$PATH:/Users/hasib/.local/bin"
-eval "$(register-python-argcomplete pipx)"
-# bun completions
-[ -s "/Users/hasib/.bun/_bun" ] && source "/Users/hasib/.bun/_bun"
-
-export ANDROID_HOME=$HOME/Library/Android/sdk
-export PATH=$PATH:$ANDROID_HOME/emulator
-export PATH=$PATH:$ANDROID_HOME/platform-tools
-
-export PATH=$HOME/flutter-sdk/flutter/bin:$PATH
-
-# export JAVA_HOME=/Library/Java/JavaVirtualMachines/zulu-22.jdk/Contents/Home
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home
-
-
-. "$HOME/.cargo/env"
+# Starship prompt init
+eval "$(starship init zsh)"
 
 # Create a django app in the apps folder
 alias djapps='function _f(){ mkdir -p apps/$1 && python manage.py startapp $1 apps/$1; }; _f'
@@ -165,6 +166,18 @@ export PATH="/Users/hasib/.codeium/windsurf/bin:$PATH"
 
 # Patch PS1 after normal activation too
 export VIRTUAL_ENV_PROMPT="${VIRTUAL_ENV_PROMPT} "
+# bun completions
+[ -s "/Users/hasib/.bun/_bun" ] && source "/Users/hasib/.bun/_bun"
 
-# Starship prompt init
-eval "$(starship init zsh)"
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+export PATH="$HOME/.volta/bin:$PATH"
+
+# Created by `pipx` on 2025-06-21 16:42:31
+export PATH="$PATH:/Users/hasib/.local/bin"
+
+[[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
+
+# Added by Windsurf
+export PATH="/Users/hasib/.codeium/windsurf/bin:$PATH"
