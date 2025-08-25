@@ -177,7 +177,3 @@ export PATH="$HOME/.volta/bin:$PATH"
 # Created by `pipx` on 2025-06-21 16:42:31
 export PATH="$PATH:/Users/hasib/.local/bin"
 
-[[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
-
-# Added by Windsurf
-export PATH="/Users/hasib/.codeium/windsurf/bin:$PATH"
